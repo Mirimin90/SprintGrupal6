@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.com" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario para Visitas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body class="text-white">
+<div class="container pt-3 cont-form">
+    <div th:replace="nav :: navegacion"></div>
+    <h1 class="text-center titulo">Formulario para Visitas</h1>
+    <div>
+        <p class="h4 p-3"></p>
+    </div>
+    <form class="form" id="formularioVisita">
+        <div class="form-group">
+            <input type="hidden" name="id" id="id">
+        </div>
+
+        <div class="form-group">
+            <label for="clienteId">ID de Cliente <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" name="clienteId" id="clienteId">
+        </div>
+        <div class="form-group">
+            <label for="fecha">Fecha <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="fecha" id="fecha" required>
+        </div>
+        <div class="form-group">
+            <label for="hora">Hora <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="hora" id="hora" required>
+        </div>
+
+        <div class="form-group">
+            <label for="lugar">Lugar <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="lugar" id="lugar">
+        </div>
+        <div class="form-group">
+            <label for="realizado"> Realizado <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" name="realizado" id="realizado">
+        </div>
+
+        <div class="form-group">
+            <label for="detalle">Detalle <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="detalle" id="detalle">
+        </div>
+        <a href="/visitaList" class="btn btn-dark">Volver</a>
+        <button class="btn btn-dark" type="submit" id="guardarBtn">Guardar</button>
+        <button class="btn btn-dark d-none" type="button" id="modificarBtn">Modificar</button>
+    </form>
+</div>
+<div th:replace="footer :: foot"></div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script th:src="@{/js/visita.js}"></script>
+<script>
+    const visitaId = window.location.pathname.split('/').pop();
+    Visita(visitaId);
+
+    document.getElementById('formularioVisita').addEventListener('submit', function(event) {
+        event.preventDefault();
+        CrearVisita();
+    });
+
+    document.getElementById('modificarBtn').addEventListener('click', function() {
+        const data = {
+            id : document.getElementById("id").value,
+            clienteId : document.getElementById("clienteId").value,
+            fecha: document.getElementById("fecha").value,
+            hora: document.getElementById("hora").value,
+            lugar: document.getElementById("lugar").value,
+            realizado: document.getElementById("realizado").value,
+            detalle: document.getElementById("detalle").value,
+        };
+
+        ActualizarVisita(data);
+    });
+</script>
+</body>
+</html>

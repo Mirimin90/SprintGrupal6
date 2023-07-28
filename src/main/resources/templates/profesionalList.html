@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.com" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profesionales</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <script src="https://kit.fontawesome.com/81a2ed02b0.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container pt-3 text-white">
+    <div th:replace="nav :: navegacion"></div>
+    <header>
+        <h1 class="titulo">Lista de Profesionales</h1>
+    </header>
+    <main class="main-form">
+        <table class="table" id="profesionalesTable">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>RUN</th>
+            <th>Teléfono</th>
+            <th>Correo electrónico</th>
+            <th>Cargo</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    </main>
+    <div th:replace="footer :: foot"></div>
+    <script th:src="@{/js/listarProfesionales.js}"></script>
+</div>
+</body>
+</html>

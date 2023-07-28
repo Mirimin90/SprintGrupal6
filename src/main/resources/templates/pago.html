@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.com" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Pagos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body class="text-white">
+<div class="container pt-3 cont-form">
+    <div th:replace="nav :: navegacion"></div>
+    <h1 class="text-center titulo">Formulario de Pagos</h1>
+
+    <form class="form" id="formularioPago">
+        <div class="form-group">
+            <input type="hidden" name="id" id="id" required>
+        </div>
+        <div class="form-group">
+            <label for="clienteId">ID del Cliente <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" name="clienteId" id="clienteId" required>
+        </div>
+        <div class="form-group">
+            <label for="monto">Monto<span class="text-danger">*</span></label>
+            <input type="number" class="form-control" name="monto" id="monto" required>
+        </div>
+        <div class="form-group">
+            <label for="fechaPago">Fecha de pago <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="fechaPago" id="fechaPago" required>
+        </div>
+
+        <a href="/pagoList" class="btn btn-dark">Volver</a>
+        <button class="btn btn-dark" type="submit" id="guardarBtn">Guardar</button>
+        <button class="btn btn-dark d-none" type="button" id="modificarBtn">Modificar</button>
+    </form>
+</div>
+<div th:replace="footer :: foot"></div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script th:src="@{/js/pago.js}"></script>
+<script>
+    const pagoId = window.location.pathname.split('/').pop();
+    Pago(pagoId);
+
+    document.getElementById('formularioPago').addEventListener('submit', function(event) {
+        event.preventDefault();
+        CrearPago();
+    });
+
+    document.getElementById('modificarBtn').addEventListener('click', function() {
+        const data = {
+            id : document.getElementById("id").value,
+            clienteId: document.getElementById("clienteId").value,
+            monto: document.getElementById("monto").value,
+            fechPago: document.getElementById("fechaPago").value,
+        };
+
+        ActualizarPago(data);
+    });
+</script>
+</body>
+</html>
